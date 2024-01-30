@@ -6,8 +6,8 @@ import { Carousel } from "@/components/carousel";
 export default function Home() {
   return (
     <>
+    <Suspense fallback={<div>Please wait...</div>}>
     <ThreeItemGrid/>
-    <Suspense>
       <Carousel/>
     </Suspense>
     </>

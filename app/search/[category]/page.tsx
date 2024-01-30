@@ -2,6 +2,7 @@ import Grid from '@/components/layout/grid';
 import ProductGridItems from '@/components/layout/grid/product-grid-items';
 import { defaultSort, sorting } from '@/app/lib/constants';
 import { getCategoryProducts } from '@/app/lib/data/actions/getProducts';
+import { Suspense } from 'react';
 
 
 export const metadata = {
@@ -23,13 +24,15 @@ export default async function CategoryPage({
 
   return (
     <section>
-      {products.length === 0 ? (
+    <Suspense fallback={<div>Please wait...</div>}>
+        {products.length === 0 ? (
         <p className="py-3 text-lg">{`No products found in this collection`}</p>
       ) : (
         <Grid className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           <ProductGridItems products={products} />
         </Grid>
       )}
+    </Suspense>
     </section>
   );
 }

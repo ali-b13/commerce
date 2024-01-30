@@ -17,7 +17,8 @@ export default async function Navbar() {
   // await getMenu('next-js-frontend-header-menu');
 
   return (
-    <nav className="relative flex items-center justify-between p-4 lg:px-6">
+    <Suspense fallback={<div>please wait</div>}>
+      <nav className="relative flex items-center justify-between p-4 lg:px-6">
       <div className="block flex-none md:hidden">
         <MobileMenu menu={menu} />
       </div>
@@ -57,5 +58,6 @@ export default async function Navbar() {
         </div>
       </div>
     </nav>
+    </Suspense>
   );
 }

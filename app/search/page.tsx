@@ -2,6 +2,7 @@ import Grid from '@/components/layout/grid';
 import ProductGridItems from '@/components/layout/grid/product-grid-items';
 import { defaultSort, sorting } from '@/app/lib/constants';
 import { getFilteredProducts } from '../lib/data/actions/getProducts';
+import { Suspense } from 'react';
 
 export const metadata = {
   title: 'Search',
@@ -21,7 +22,8 @@ export default async function SearchPage({
 
   return (
     <>
-      {searchValue ? (
+     <Suspense>
+       {searchValue ? (
         <p className="mb-4">
           {products.length === 0
             ? 'There are no products that match '
@@ -34,6 +36,7 @@ export default async function SearchPage({
           <ProductGridItems products={products} />
         </Grid>
       ) : null}
+     </Suspense>
     </>
   );
 }
