@@ -2,7 +2,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 import type { Stripe } from "stripe";
 import { stripe } from "@/app/lib/stripe";
-import { Suspense } from 'react';
 export default async function successPage({
   searchParams,
 }: {
@@ -20,8 +19,7 @@ export default async function successPage({
   console.log(paymentIntent,'payment intent')
   console.log("checout",checkoutSession)
   return (
-   <Suspense>
-     <div className="h-[86vh] flex flex-col justify-center items-center bg-blue-100">
+    <div className="h-[86vh] flex flex-col justify-center items-center bg-blue-100">
       <Head>
         <title>Payment Successful</title>
         <meta name="description" content="Your payment was successful!" />
@@ -53,6 +51,5 @@ export default async function successPage({
       </div>
         <Link href={"/"} className='bg-blue-500 text-white text-center rounded-lg p-2 mt-4 w-[70%] md:w-[30%] '>Go Back</Link>
     </div>
-   </Suspense>
   );
 }
