@@ -18,7 +18,7 @@ import Link from 'next/link';
     >
       <Link className="relative block aspect-square h-full w-full" href={`/product/${item.id}`}>
         <GridTileImage
-          src={String(process.env?.Url_image_prefix||""+item.image||"")}
+          src={item.image||""}
           fill
           sizes={
             size === 'full' ? '(min-width: 768px) 66vw, 100vw' : '(min-width: 768px) 33vw, 100vw'
