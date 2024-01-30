@@ -84,7 +84,7 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
                 >
                   <GridTileImage
                     alt={image.altText}
-                    src={image.src}
+                    src={String(process.env.Url_image_prefix+image.src)||""}
                     width={80}
                     height={80}
                     active={isActive}
