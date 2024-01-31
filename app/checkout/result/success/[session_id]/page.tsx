@@ -7,8 +7,11 @@ export default async function successPage({
 }: {
   searchParams: { session_id: string };
 }): Promise<JSX.Element> {
- if (!searchParams.session_id)
-    throw new Error("Please provide a valid session_id (`cs_test_...`)");
+ if (!searchParams.session_id){
+  throw new Error("Please provide a valid session_id (`cs_test_... `)");
+ }
+    
+
 
   const checkoutSession: Stripe.Checkout.Session =
     await stripe.checkout.sessions.retrieve(searchParams.session_id, {
@@ -44,7 +47,7 @@ export default async function successPage({
         <h1 className="text-3xl font-bold text-center text-green-600 mb-1">
           Payment Successful
         </h1>
-        <p className='text-sm font-semibold text-center text-neutral-400 mb-4'>Payment id 29485fj48f4judsj4jsudr</p>
+        <p className='text-sm font-semibold text-center text-neutral-400 mb-4'>Payment id {paymentIntent.id}</p>
         <p className="text-lg text-center text-gray-700">
           Thank you for your payment.
         </p>
