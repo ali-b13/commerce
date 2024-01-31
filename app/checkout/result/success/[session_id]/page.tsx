@@ -2,15 +2,12 @@ import Head from 'next/head';
 import Link from 'next/link';
 import type { Stripe } from "stripe";
 import { stripe } from "@/app/lib/stripe";
+import { notFound } from 'next/navigation';
 export default async function successPage({
   searchParams,
 }: {
   searchParams: { session_id: string };
 }): Promise<JSX.Element> {
- if (!searchParams.session_id){
-  throw new Error("Please provide a valid session_id (`cs_test_... `)");
- }
-    
 
 
   const checkoutSession: Stripe.Checkout.Session =
@@ -18,9 +15,12 @@ export default async function successPage({
       expand: ["line_items", "payment_intent"],
     });
 
-  const paymentIntent = checkoutSession.payment_intent as Stripe.PaymentIntent;
+  const paymentIntent =await  checkoutSession.payment_intent as Stripe.PaymentIntent;
   console.log(paymentIntent,'payment intent')
   console.log("checout",checkoutSession)
+  if(!paymentIntent.id){
+    return notFound()
+  }
   return (
     <div className="h-[86vh] flex flex-col justify-center items-center bg-blue-100">
       <Head>
