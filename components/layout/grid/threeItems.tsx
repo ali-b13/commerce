@@ -18,7 +18,7 @@ import Link from 'next/link';
     >
       <Link className="relative block aspect-square h-full w-full" href={`/product/${item.id}`}>
         <GridTileImage
-          src={process.env.Url_image_prefix+item.image||""} 
+          src={`https://arama-12121-l04hl5bo8-ali-b13.vercel.app`+item.image||""} 
           fill
           sizes={
             size === 'full' ? '(min-width: 768px) 66vw, 100vw' : '(min-width: 768px) 33vw, 100vw'
