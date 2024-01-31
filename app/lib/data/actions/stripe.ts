@@ -27,8 +27,8 @@ export async function createCheckoutSession(
             
             ...(ui_mode === "hosted" && {
                 
-                success_url: `${origin}/checkout/result/success/{CHECKOUT_SESSION_ID}?session_id={CHECKOUT_SESSION_ID}`,
-                cancel_url: `${origin}/checkout/result/cancel/{CHECKOUT_SESSION_ID}?session_id={CHECKOUT_SESSION_ID}`,
+                success_url: `${origin}/checkout/result/success/{CHECKOUT_SESSION_ID}`,
+                cancel_url: `${origin}/checkout/result/cancel/{CHECKOUT_SESSION_ID}`,
             }),
             ui_mode,
         });

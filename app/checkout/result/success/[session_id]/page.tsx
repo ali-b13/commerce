@@ -4,14 +4,14 @@ import type { Stripe } from "stripe";
 import { stripe } from "@/app/lib/stripe";
 import { notFound } from 'next/navigation';
 export default async function successPage({
-  searchParams,
+  params,
 }: {
-  searchParams: { session_id: string };
+  params: { session_id: string };
 }): Promise<JSX.Element> {
 
 
   const checkoutSession: Stripe.Checkout.Session =
-    await stripe.checkout.sessions.retrieve(searchParams.session_id, {
+    await stripe.checkout.sessions.retrieve(params.session_id, {
       expand: ["line_items", "payment_intent"],
     });
 
