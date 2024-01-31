@@ -112,7 +112,7 @@ export default function CartModal({ cart }: { cart: any | undefined }) {
                                   alt={
                                     item.product.title 
                                   }
-                                  src={`http://localhost:3000${item.product.image}`}
+                                  src={item.product.image}
                                 />
                               </div>
 
