@@ -1,14 +1,28 @@
 import { PrismaClient } from '@prisma/client';
+import getUser from './getUser';
+import { getServerSession } from 'next-auth';
+import { authConfig } from '@/authConfig';
 
 const prisma = new PrismaClient();
 
 
 export const getCart=async(cartId:string)=>{
     try {
-        const cart =await prisma.cart.findFirst({where:{id:cartId},include:{lines:{include:{product:true}}}})
+        const user= await getServerSession(authConfig)
+        const cart = await prisma.cart.findFirst({
+            where: { id: cartId },
+            include: {
+                lines: {
+                    include: {
+                        product: true,
+                        ProductVariant: true  // Include the associated product variant
+                    }
+                }
+            }
+        });
         const { subtotalAmount, taxAmount, totalAmount }:any =await  calculateCartTotal(cart?.lines)
       
-        return { products: cart?.lines, totalItems: cart?.lines.length || 0, taxes: taxAmount, subtotalAmount,totalAmount}
+        return { products: cart?.lines, totalItems: cart?.lines.length || 0,cartId:cart?.id, user:user?.user.name,taxes: taxAmount, subtotalAmount,totalAmount}
     } catch (error) {
         console.log(error)
     }

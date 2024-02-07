@@ -10,18 +10,25 @@ import MobileMenu from './mobile-menu';
 import Search from './search';
 import { getThreeItemCategory } from '@/app/lib/data/actions/getCategories';
 import { Category } from '@prisma/client';
+import { DeskTopNavbarSkeleton, MobileNavBarSkelton } from '../skeltons/navbar';
+import UserAuthButtons from '../UserAuthButtons';
+import { SessionProp } from '@/app/lib/data/types';
 const SITE_NAME  = "Arma";
 
-export default async function Navbar() {
+export default async function Navbar({session}:{session:SessionProp|null}) {
   const menu:Category[] =await getThreeItemCategory()
+
   // await getMenu('next-js-frontend-header-menu');
 
   return (
-    <Suspense fallback={<div>please wait</div>}>
-      <nav className="relative flex items-center justify-between p-4 lg:px-6">
+    <nav className="relative flex items-center justify-between p-4 lg:px-6">
+
       <div className="block flex-none md:hidden">
+   
         <MobileMenu menu={menu} />
+     
       </div>
+        <Suspense fallback={<DeskTopNavbarSkeleton/>}>
       <div className="flex w-full items-center">
         <div className="flex w-full md:w-1/3">
           <Link href="/" className="mr-2 flex w-full items-center justify-center md:w-auto lg:mr-6">
@@ -49,15 +56,15 @@ export default async function Navbar() {
           <Search />
          
         </div>
-        <div className="flex items-center justify-end md:w-1/3">
+        <div className="flex items-center justify-end md:w-1/3 gap-4">
            <div className='hidden md:flex w-full  gap-4 ml-12'>
-            <span>Login</span>
-            <span>Sign Up</span>
+            <UserAuthButtons session={session}/>
           </div>
+            <Link href={'/orders'} className='text-neutral-800 cursor-pointer hover:text-neutral-400'>Orders</Link>
          <Cart/>
         </div>
       </div>
-    </nav>
     </Suspense>
+    </nav>
   );
 }

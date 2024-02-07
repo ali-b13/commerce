@@ -16,8 +16,6 @@ export default async function successPage({
     });
 
   const paymentIntent =await  checkoutSession.payment_intent as Stripe.PaymentIntent;
-  console.log(paymentIntent,'payment intent')
-  console.log("checout",checkoutSession)
   if(!paymentIntent.id){
     return notFound()
   }

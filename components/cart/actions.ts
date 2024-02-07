@@ -1,11 +1,14 @@
 "use server"
 import { addToCart, createCart, getCart, removeItem, updateCart } from "@/app/lib/data/actions/cart";
+import getUser from "@/app/lib/data/actions/getUser";
+import { authConfig } from "@/authConfig";
 import {  PrismaClient } from "@prisma/client"
+import { getServerSession } from "next-auth";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
- const prisma =new PrismaClient
 export const addItem=async(prevState: any, selectedVariant: string | undefined)=>{
+   const user =await getUser()
   console.log(prevState)
   console.log(selectedVariant,'id')
     let cartId = cookies().get('cartId')?.value;
@@ -16,7 +19,7 @@ export const addItem=async(prevState: any, selectedVariant: string | undefined)=
     }
 
     if (!cartId || !cart) {
-        cart = await createCart();
+        cart = await createCart(user?.id);
         cartId = cart.id;
         cookies().set('cartId', cartId);
     }
@@ -29,6 +32,7 @@ export const addItem=async(prevState: any, selectedVariant: string | undefined)=
         await addToCart(cartId, productId, 1 , selectedOptions);
         revalidateTag('cart');
     } catch (e) {
+        console.log(e)
         return 'Error adding item to cart';
     }
 }

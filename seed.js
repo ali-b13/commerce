@@ -6,7 +6,7 @@ import { PrismaClient } from "@prisma/client";
          price: 1299,
          description: "The all-new iMac features a stunning 24-inch 4.5K Retina display, Apple M1 chip, and a sleek design.",
          image: "/uploads/apple-desktop.jpg",
-         category: 25,
+         category: 3,
          brand: "Apple",
          isHidden:true,
          stock: 50,
@@ -39,7 +39,7 @@ import { PrismaClient } from "@prisma/client";
          price: 800,
          description: "High-performance mountain bike designed for off-road trails and rugged terrain",
          image: "/uploads/bicycle-1.png",
-         category: 33,
+         category: 11,
          brand: "Trek",
          isHidden:true,
          stock: 50,
@@ -69,7 +69,7 @@ import { PrismaClient } from "@prisma/client";
     price: 399,
     description: "The latest Apple Watch Series 7 with a larger display and advanced features.",
     image: "/uploads/apple-watch-1.jpg",
-    category: 25,
+    category: 3,
     brand: "Apple",
     isHidden:true,
     stock: 100,
@@ -103,7 +103,7 @@ import { PrismaClient } from "@prisma/client";
          price: 120,
          description: "Comfortable and lightweight running shoes for your daily workouts",
          image: "/uploads/shoes-1.png",
-         category: 27,
+         category: 5,
          brand: "Nike",
          stock: 100,
          currencyCode: "USD",
@@ -134,7 +134,7 @@ import { PrismaClient } from "@prisma/client";
         price: 400,
         description: "Nice T-shirt for all kind",
         image: "/uploads/t-shirt-jordan-white.jpg",
-        category: 32,
+        category: 10,
         brand: "Jordan",
         stock: 100,
         currencyCode: "USD",
@@ -169,7 +169,7 @@ import { PrismaClient } from "@prisma/client";
         price: 50,
         description: "Beautiful hat for summer time so you can be fashionable person and gets attracted",
         image: "/uploads/cowboy-hat-black-1.png",
-        category: 28,
+        category: 6,
         brand: "Arma",
         stock: 100,
         currencyCode: "USD",
@@ -211,7 +211,7 @@ import { PrismaClient } from "@prisma/client";
          description: "Baby cloth to wear nice and affordable to get for your beloved child ",
          variants: ["6M", "3M", 'NB', "12M"],
          image: "/uploads/baby-onesie-black-1.png",
-         category: 31,
+         category: 9,
          reviews: [],
          brand: "Arma",
          stock: 40,
@@ -249,7 +249,7 @@ import { PrismaClient } from "@prisma/client";
          price: 70,
          description: "A bag with beautiful design and good looking for nice occasions ",
          image: "/uploads/bag-black.png",
-         category: 24,
+         category: 2,
          country: "Made in UAE",
          reviews: [],
          brand: "Arma",
@@ -283,7 +283,7 @@ import { PrismaClient } from "@prisma/client";
          price: 400,
          description: "Nice T-shirt for all kind",
          image: "/uploads/t-shirt-circles-black.png",
-         category: 32,
+         category: 10,
          brand: "Nike",
          country: "Made in Yemen",
          stock: 100,
@@ -319,7 +319,7 @@ import { PrismaClient } from "@prisma/client";
          price: 900,
          description: "Capture the moment with this high-quality Panasonic camera.",
          image: "/uploads/camera-1.jpg",
-         category: 25,
+         category: 3,
          brand: "Panasonic",
          country: "Japan",
          stock: 50,
@@ -346,7 +346,7 @@ import { PrismaClient } from "@prisma/client";
          price: 15,
          description: "Enjoy your favorite hot beverage with this stylish coffee mug.",
          image: "/uploads/mug-1.png",
-         category: 26,
+         category: 4,
          brand: "Arma",
          country: "Made in USA",
          stock: 50,
@@ -372,10 +372,10 @@ import { PrismaClient } from "@prisma/client";
      },
      {
          title: "Mechanical Keyboard",
-         price: 100,
+         price: 30,
          description: "Enhance your typing experience with this durable mechanical keyboard.",
          image: "/uploads/keyboard.png",
-         category: 25,
+         category: 3,
          brand: "TechMaster",
          country: "Made in Taiwan",
          stock: 30,
@@ -404,7 +404,7 @@ import { PrismaClient } from "@prisma/client";
          price: 45,
          description: "Stay warm and stylish with this cozy hoodie.",
          image: "/uploads/hoodie-1.png",
-         category: 29,
+         category: 7,
          brand: "CozyWear",
          country: "Made in USA",
          stock: 50,
@@ -433,7 +433,7 @@ import { PrismaClient } from "@prisma/client";
          price: 600,
          description: "Powerful small engine suitable for various applications.",
          image: "/uploads/engine-1.jpg",
-         category: 25,
+         category: 3,
          brand: "PowerTech",
          country: "Made in Germany",
          stock: 20,
@@ -488,7 +488,7 @@ import { PrismaClient } from "@prisma/client";
          price: 50,
          description: "Fun and colorful toy car for kids to enjoy playing with.",
          image: "/uploads/kid-car-toy.jpg",
-         category: 31,
+         category: 9,
          brand: "PlayfulKids",
          country: "Made in China",
          stock: 30,
@@ -535,7 +535,7 @@ import { PrismaClient } from "@prisma/client";
          price: 150,
          description: "Classic black leather jacket for a timeless look.",
          image: "/uploads/jacket-brown.jpg",
-         category: 30,
+         category: 8,
          brand: "ClassicStyle",
          country: "Made in USA",
          stock: 30,
@@ -582,7 +582,7 @@ import { PrismaClient } from "@prisma/client";
          price: 90,
          description: "Stylish blue denim jacket for a casual look.",
          image: "/uploads/jacket-blue.jpg",
-         category: 30,
+         category: 8,
          brand: "UrbanDenim",
          country: "Made in Japan",
          stock: 25,
@@ -609,7 +609,7 @@ import { PrismaClient } from "@prisma/client";
          price: 180,
          description: "Warm and stylish parka jacket for cold weather.",
          image: "/uploads/bomber-jacket-army.png",
-         category: 30,
+         category: 8,
          brand: "OutdoorGear",
          country: "Made in Canada",
          stock: 20,
@@ -638,7 +638,7 @@ import { PrismaClient } from "@prisma/client";
          price: 1499,
          description: "Powerful laptop with stunning display and performance.",
          image: "/uploads/dell-laptop.jpg",
-         category: 25,
+         category: 3,
          brand: "Dell",
          stock: 50,
          currencyCode: "USD",
@@ -682,19 +682,19 @@ import { PrismaClient } from "@prisma/client";
 
 // const bcrypt = require('bcrypt');
 
-// const categoryData = [
-//     "All",
-//     "Bags",
-//     "Electronics",
-//     "Drinkware",
-//     "Footwear",
-//     "Headwear",
-//     "Hoodies",
-//     "Jackets",
-//     "Kids",
-//     "Shirts",
-//     "Motors"
-// ];
+const categoryData = [
+    "All",
+    "Bags",
+    "Electronics",
+    "Drinkware",
+    "Footwear",
+    "Headwear",
+    "Hoodies",
+    "Jackets",
+    "Kids",
+    "Shirts",
+    "Motors"
+];
 const newProducts=[
     
   
@@ -720,9 +720,11 @@ async function seedCategories() {
 const prisma = new PrismaClient()
 async function main() {
     //   await seedCategories()
-    //   await seedProducts()
-    await editProduct("4990e7b8-ddc2-4c47-a62f-a6d4b8633ab1")
-    
+      await seedProducts()
+    // await editProduct("4990e7b8-ddc2-4c47-a62f-a6d4b8633ab1")
+    // await prisma.productVariant.deleteMany()
+    // await prisma.cartLine.deleteMany()
+    // await prisma.cart.deleteMany()
     // await deleteProduct("4990e7b8-ddc2-4c47-a62f-a6d4b8633ab1")
     // await prisma.selectedOption.deleteMany();
     // await prisma.variant.deleteMany();
@@ -750,7 +752,7 @@ main()
 
 
 async function seedProducts(){
-    for (const product of newProducts) {
+    for (const product of products) {
         await prisma.product.create({
             data: {
                 title: product.title,

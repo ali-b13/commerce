@@ -3,6 +3,7 @@ import ProductGridItems from '@/components/layout/grid/product-grid-items';
 import { defaultSort, sorting } from '@/app/lib/constants';
 import { getFilteredProducts } from '../lib/data/actions/getProducts';
 import { Suspense } from 'react';
+import { SearchProductsSkelton } from '@/components/skeltons/home-products-skelton';
 
 export const metadata = {
   title: 'Search',
@@ -22,7 +23,7 @@ export default async function SearchPage({
 
   return (
     <>
-     <Suspense>
+     <Suspense fallback={<SearchProductsSkelton/>}>
        {searchValue ? (
         <p className="mb-4">
           {products.length === 0

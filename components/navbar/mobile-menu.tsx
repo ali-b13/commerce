@@ -3,11 +3,12 @@
 import { Dialog, Transition } from '@headlessui/react';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, Suspense, useEffect, useState } from 'react';
 
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 import Search from './search';
+import { MobileNavBarSkelton } from '../skeltons/navbar';
 
 export default function MobileMenu({ menu }: { menu:any}) {
   const pathname = usePathname();
@@ -15,7 +16,6 @@ export default function MobileMenu({ menu }: { menu:any}) {
   const [isOpen, setIsOpen] = useState(false);
   const openMobileMenu = () => setIsOpen(true);
   const closeMobileMenu = () => setIsOpen(false);
-
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 768) {
@@ -32,6 +32,8 @@ export default function MobileMenu({ menu }: { menu:any}) {
 
   return (
     <>
+    <Suspense fallback={<MobileNavBarSkelton/>}>
+
       <button
         onClick={openMobileMenu}
         aria-label="Open mobile menu"
@@ -72,7 +74,7 @@ export default function MobileMenu({ menu }: { menu:any}) {
                 >
                   <XMarkIcon color='black' className="h-6" />
                 </button>
-                <div className='flex md:hidden w-full  gap-4 w-auto '>
+                <div className='flex md:hidden   gap-4 w-auto '>
             <span>Login</span>
             <span>Sign Up</span>
             </div>
@@ -86,10 +88,10 @@ export default function MobileMenu({ menu }: { menu:any}) {
                     {menu.map((item: any) => (
                       <li
                         className="py-2 text-xl text-black transition-colors hover:text-neutral-500 "
-                        key={item.title}
+                        key={item.id}
                       >
-                        <Link href={item.path} onClick={closeMobileMenu}>
-                          {item.title}
+                        <Link href={item.name} onClick={closeMobileMenu}>
+                          {item.name}
                         </Link>
                       </li>
                     ))}
@@ -100,6 +102,7 @@ export default function MobileMenu({ menu }: { menu:any}) {
           </Transition.Child>
         </Dialog>
       </Transition>
+     </Suspense>
     </>
   );
 }

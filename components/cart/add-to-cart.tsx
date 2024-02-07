@@ -27,7 +27,7 @@ function SubmitButton({
     );
   }
 
-  if (selectedVariantId.selectedOptions.length<1) {
+  if (!selectedVariantId.selectedOptions.length) {
     return (
       <button
         aria-label="Please select an option"

@@ -8,8 +8,125 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-model Product {
+model Account {
+  id                String  @id @default(uuid())
+  userId            String
+  type              String?
+  provider          String?
+  providerAccountId String?
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
   id           String   @id @default(uuid())
+  userId       String
+  expires      DateTime
+  sessionToken String   @unique
+  accessToken  String   @unique
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now())
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map(name: "sessions")
+}
+
+model VerificationRequest {
+  id         Int      @id @default(autoincrement())
+  identifier String
+  token      String   @unique
+  expires    DateTime
+  createdAt  DateTime @default(now()) @map(name: "created_at")
+  updatedAt  DateTime @default(now()) @map(name: "updated_at")
+
+  @@map(name: "verification_requests")
+}
+
+model User {
+  id            String    @id @default(uuid())
+  name          String?
+  email         String    @unique
+  image         String?
+  emailVerified Boolean?
+  hashPassword  String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  orders        Order[]
+  accounts      Account[]
+  sessions      Session[]
+}
+
+model Order {
+  id                 String          @id @default(uuid())
+  name               String
+  amount             Int
+  address            String
+  product            Product         @relation(fields: [productId], references: [id])
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+  paid               String
+  stages             Stage[]         // Define a relation to the Stage model
+  orderProductVaraint orderProdcutVaraint[]
+  userId             String?
+  User               User?           @relation(fields: [userId], references: [id])
+  productId          String
+  quantity           Int
+  productVariantId   String?
+ 
+}
+model orderProdcutVaraint {
+  id           String   @id @default(uuid())
+  name String ?
+  value String?
+  orderId String ?
+  order Order? @relation(fields: [orderId],references: [id])
+} 
+
+model Stage {
+  id          String   @id @default(uuid())
+  name        String   // Example: "Received", "Out for Delivery", "Delivered"
+  date        DateTime // Date when this stage was reached
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade) // Cascade deletion from Order to Stage
+  orderId     String   // Foreign key to relate each stage to its order
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+model ProductVariant {
+  id          String   @id @default(uuid())
+  name        String
+  value       String
+  cartLineId  String
+  cartLine    CartLine  @relation(fields: [cartLineId], references: [id],onDelete: Cascade)
+  // Define the relation to Option
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+ 
+}
+
+model Option {
+  id             String    @id @default(uuid())
+  name           String
+  values         String[]
+  productId      String
+  product        Product   @relation(fields: [productId], references: [id])
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+
+
+
+model Product {
+  id           String    @id @default(uuid())
   title        String
   price        Int
   description  String?
@@ -18,17 +135,17 @@ model Product {
   stock        Int?
   currencyCode String?
   isHidden     Boolean?
-  countSold    Int      @default(0)
+  countSold    Int       @default(0)
   material     String?
   rating       Float?
   salePrice    Int?
   weight       String?
   country      String?
   categoryId   Int
-  category     Category @relation(fields: [categoryId], references: [id])
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  cartLine CartLine ?
+  category     Category  @relation(fields: [categoryId], references: [id])
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  cartLine     CartLine?
 
   // Relationships
   options          Option[]
@@ -36,6 +153,7 @@ model Product {
   reviews          Review[]
   additionalImages AdditionalImage[]
   tags             String[]
+  Order            Order[]
 }
 
 // schema.prisma
@@ -52,32 +170,15 @@ model CartLine {
   id             String           @id @default(uuid())
   quantity       Int
   productId      String // Assuming product ID is stored here
-  product Product  @relation(fields: [productId],references: [id])
+  product        Product          @relation(fields: [productId], references: [id])
   cart           Cart             @relation(fields: [cartId], references: [id])
   cartId         String
-  ProductVariant ProductVariant[]
+  ProductVariant ProductVariant[] 
+
   @@unique([productId])
 }
 
-model ProductVariant {
-  id            String   @id @default(uuid())
-  name          String
-  value         String
-  cartLineId    String
-  cartLine      CartLine @relation(fields: [cartLineId], references: [id])
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-}
 
-model Option {
-  id        String   @id @default(uuid())
-  name      String
-  values    String[]
-  productId String
-  product   Product  @relation(fields: [productId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
 
 model Variant {
   id               String           @id @default(uuid())

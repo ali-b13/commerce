@@ -3,11 +3,18 @@ import Image from "next/image";
 import { ThreeItemGrid } from "@/components/layout/grid/threeItems";
 import { Suspense } from "react";
 import { Carousel } from "@/components/carousel";
-export default function Home() {
+import { CarouselProductsSkeleton, DeskTopHomeProductsSkeleton } from "@/components/skeltons/home-products-skelton";
+
+export default async function Home() {
+
   return (
     <>
-    <Suspense fallback={<div>Please wait...</div>}>
+    
+    <Suspense fallback={<DeskTopHomeProductsSkeleton/>}>
     <ThreeItemGrid/>
+    </Suspense>
+    <Suspense fallback={<CarouselProductsSkeleton/>}>
+
       <Carousel/>
     </Suspense>
     </>

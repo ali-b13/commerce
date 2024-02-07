@@ -13,6 +13,7 @@ import { EditItemQuantityButton } from './edit-item-quantity-button';
 import OpenCart from './open-cart';
 import { createUrl } from '@/app/lib/utils';
 import CheckoutForm from '../checkoutForm';
+import useLoginModal from '@/app/hooks/useLoginModal';
 
 type MerchandiseSearchParams = {
   [key: string]: string;
@@ -23,7 +24,20 @@ export default function CartModal({ cart }: { cart: any | undefined }) {
   const quantityRef = useRef(cart?.totalItems);
   const openCart = () => setIsOpen(true);
   const closeCart = () => setIsOpen(false);
-
+   const {onOpen}=useLoginModal()
+  const handleCartCloseLoginOpen=()=>{
+    setIsOpen(false)
+    onOpen()
+  }
+  const CheckUserLoggedIn=async()=>{
+    if(cart.user){
+     return  <CheckoutForm uiMode='hosted' data={cart}/>
+    }
+    else {
+      return <button onClick={handleCartCloseLoginOpen} className='bg-blue-600 text-white p-2 text-center '>Login to continue checkout</button>
+    }
+    
+  }
   useEffect(() => {
     // Open cart modal when quantity changes.
     if (cart?.totalItems !== quantityRef.current) {
@@ -165,13 +179,13 @@ export default function CartModal({ cart }: { cart: any | undefined }) {
                       />
                     </div>
                   </div>
-                  <p
+                  <div
                     className="block w-full rounded-full bg-blue-600 p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
                   >
-                  <span className='cursor-pointer'>
-                     <CheckoutForm uiMode='hosted'data={cart}/>
-                  </span>
-                  </p>
+                  
+                    <CheckUserLoggedIn/>
+                 
+                  </div>
                 </div>
               )}
             </Dialog.Panel>

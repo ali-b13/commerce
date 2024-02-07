@@ -45,3 +45,13 @@ type AdditionalImage = {
     src: string;
     altText: string;
 };
+
+
+export type SessionProp = {
+   user:{
+        name?: String,
+        image?: String,
+        email?: String
+   }
+   expires:Date
+}
