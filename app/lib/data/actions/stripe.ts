@@ -10,7 +10,8 @@ import { formatAmountForStripe } from "@/app/lib/utils";
 import { calculateCartTotal } from "./cart";
 import getUser from "./getUser";
 
-import prisma from '@/app/lib/prismaDB'
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient()
 export async function createCheckoutSession(
     data: any,
 ): Promise<{ client_secret: string | null; url: string | undefined }> {

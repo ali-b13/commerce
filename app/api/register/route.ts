@@ -2,7 +2,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import bcrypt from 'bcrypt'
 import { NextResponse } from "next/server";
 import {z} from 'zod'
-import prisma from '@/app/lib/prismaDB'
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient()
 const FormSchema = z.object({
     name: z.string(),
     email: z.string({ invalid_type_error: "Please select a customer" }),

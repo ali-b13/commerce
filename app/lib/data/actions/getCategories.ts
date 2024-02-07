@@ -1,5 +1,6 @@
 
-import prisma from '@/app/lib/prismaDB'
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient()
 export const getCategories = async () => {
     const categories = await prisma.category.findMany({orderBy:{createdAt:"asc"}})
     return categories

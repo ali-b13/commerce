@@ -1,6 +1,7 @@
 import { getServerSession } from "next-auth";
 import { authConfig } from "@/authConfig";
-import prisma from '@/app/lib/prismaDB'
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient()
 
   const getUser=async()=>{
    try {

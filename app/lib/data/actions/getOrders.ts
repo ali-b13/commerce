@@ -1,4 +1,5 @@
-import prisma from '@/app/lib/prismaDB'
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient()
 import getUser from './getUser'
 export const getOrders = async () => {
     const user =await getUser()

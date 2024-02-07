@@ -1,5 +1,6 @@
 import type { Stripe } from "stripe";
-import prisma from "@/app/lib/prismaDB"
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient()
 import { NextResponse } from "next/server";
 
 import { stripe } from "@/app/lib/stripe";

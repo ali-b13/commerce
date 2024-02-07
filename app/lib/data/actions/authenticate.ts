@@ -1,5 +1,6 @@
 "use server";
-import prisma from "@/app/lib/prismaDB"
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient()
 import bcrypt from "bcrypt"
 import { signIn } from "next-auth/react";
  type DataType={
