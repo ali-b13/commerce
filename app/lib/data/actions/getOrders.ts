@@ -6,6 +6,7 @@ export const getOrders = async () => {
     if(user){
         const orders = await prisma.order.findMany({where:{userId:user.id},include:{product:true,stages:true}, orderBy: { createdAt: "asc" } })
         prisma.$disconnect()
+        
         return orders
 
     }

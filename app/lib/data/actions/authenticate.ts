@@ -16,9 +16,9 @@ export const authenticateUser=async({type,data}:DataType)=>{
         await signIn("google");
     }else if(type=="credentials" && data){
         console.log("'goes to credentials ",data)
-    const user= await  prisma.user.findUnique({where:{email:data.email}})
+    const user= await  prisma.user.findUnique({where:{email:data?.email}})
     if(user){
-        const isEqualPassword = await bcrypt.compare(data.password, user.hashPassword || "")
+        const isEqualPassword = await bcrypt.compare(data?.password, user.hashPassword || "")
         if(isEqualPassword){
             await signIn("credentials",{email:user.email,password:data.password})
             prisma.$disconnect()

@@ -22,32 +22,29 @@ export default async function successPage({
   return (
     <div className="h-[86vh] flex flex-col justify-center items-center bg-blue-100">
       <div className='h-[50vh] shadow-md '>
-        <title>Payment Successful</title>
-        <meta name="description" content="Your payment was successful!" />
+        <title>Payment Failed</title>
+        <meta name="description" content="Your payment was failed!" />
         <link rel="icon" href="/favicon.ico" />
       </div>
 
       <div className="bg-white w-[95%] md:w-[60%] p-12 rounded-lg  shadow-md">
         <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-16 w-16 text-green-600 mx-auto mb-4"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        width="24"
+        height="24"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M5 13l4 4L19 7"
-          />
+        <circle cx="12" cy="12" r="10" stroke-width="2" />
+        <path d="M15 9l-6 6M9 9l6 6" />
         </svg>
-        <h1 className="text-3xl font-bold text-center text-green-600 mb-1">
-          Payment Successful
+        <h1 className="text-3xl font-bold text-center text-red-600 mb-1">
+          Payment Failed
         </h1>
-        <p className='text-sm font-semibold text-center text-neutral-400 mb-4'>Payment id {paymentIntent.id}</p>
+        <p className='text-sm font-semibold text-center text-red-400 mb-4'>Payment id {paymentIntent.id}</p>
         <p className="text-lg text-center text-gray-700">
-          Thank you for your payment.
+          please try again .
         </p>
       </div>
         <Link href={"/"} className='bg-blue-500 text-white text-center rounded-lg p-2 mt-4 w-[70%] md:w-[30%] '>Go Back</Link>

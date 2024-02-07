@@ -2,9 +2,9 @@ import OrdersTable from "@/components/orders/table";
 import { getOrders } from "../lib/data/actions/getOrders";
 import { Suspense } from "react";
 
-export default  async function ordersPage(){
+export default  async function page(){
   const orders =await getOrders()
-  console.log(orders,'orders')
+
   return(
     <div className="w-full flex flex-col align-middle">
        <Suspense fallback={<div className="animate-pulse w-full bg-neutral-300 h-12"></div>}>

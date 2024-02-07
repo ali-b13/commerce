@@ -2,7 +2,7 @@ import Image from 'next/image';
 import OrderStatus from './status';
 import { formatAmountForDisplay, formatDateToLocal } from '@/app/lib/utils';
 import {IndicatorStatusMobile} from './indicatorStatus';
-
+export const revalidate ="force-cache"
 export default  function OrdersTable({orders}:any) {
 
   return (
@@ -30,7 +30,7 @@ export default  function OrdersTable({orders}:any) {
                     <p className="text-sm text-gray-500">To:{order.address}</p>
                     
                   </div>
-                  {/* <OrderStatus status={order.status} /> */}
+                 
                   <IndicatorStatusMobile status={order.stages}/>
                  
                 </div>
