@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client"
-const prisma=new PrismaClient
+const prisma=new PrismaClient()
 export const getHomeProducts=async()=>{
   const products= await  prisma.product.findMany({where:{isHidden:true}})
   return products
@@ -8,10 +8,9 @@ export const getHomeCarouselProducts = async () => {
   try {
     // Retrieve unique category names
     const categories = await prisma.category.findMany();
-
     // Initialize an array to store carousel products
     const carouselProducts = [];
-
+    
     // Fetch one product from each category
     for (const category of categories) {
       const product = await prisma.product.findFirst({
@@ -23,7 +22,8 @@ export const getHomeCarouselProducts = async () => {
         carouselProducts.push(product);
       }
     }
-
+    
+    prisma.$disconnect()
     return carouselProducts;
   } catch (error) {
     console.error("Error fetching carousel products:", error);
@@ -33,6 +33,7 @@ export const getHomeCarouselProducts = async () => {
 
 export const getProduct = async (id:string) => {
     const product = await prisma.product.findFirst({where:{id:id},include:{additionalImages:true,options:true,variants:{include:{selectedOptions:true}},reviews:true}})
+  prisma.$disconnect()
     return product
 }
 
@@ -49,7 +50,7 @@ export const getRelatedProducts = async (id: string) => {
     take: 10,
   });
 
-
+  prisma.$disconnect()
   return relatedProducts
 }
 
@@ -86,7 +87,7 @@ export const getFilteredProducts=async(
   });
 
   // Reverse the order if reverse is true
-  
+  prisma.$disconnect()
   return products;
 
 }
@@ -127,6 +128,6 @@ console.log(category,'gategory')
 })
     
 
-
+  prisma.$disconnect()
   return products;
 }

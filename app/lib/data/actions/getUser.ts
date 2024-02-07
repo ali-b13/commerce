@@ -7,6 +7,7 @@ const prisma = new PrismaClient()
    try {
      const session = await getServerSession(authConfig);
      const user = await prisma.user.findUnique({ where: { email: session.user.email, name: session.user.name } })
+     prisma.$disconnect()
      return user
    } catch (error) {
      console.log(error)

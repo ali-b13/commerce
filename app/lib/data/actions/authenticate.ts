@@ -1,8 +1,8 @@
 "use server";
 import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient()
 import bcrypt from "bcrypt"
 import { signIn } from "next-auth/react";
+const prisma = new PrismaClient()
  type DataType={
     data?:{
         email:string,
@@ -21,10 +21,13 @@ export const authenticateUser=async({type,data}:DataType)=>{
         const isEqualPassword = await bcrypt.compare(data.password, user.hashPassword || "")
         if(isEqualPassword){
             await signIn("credentials",{email:user.email,password:data.password})
+            prisma.$disconnect()
         }
+        prisma.$disconnect()
         return { error: { message: "Invalid credentials" } }
         
     }
+        prisma.$disconnect()
         return { error: { message: "Invalid credentials" } }
     }
 

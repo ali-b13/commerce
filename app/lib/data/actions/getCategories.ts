@@ -7,6 +7,7 @@ export const getCategories = async () => {
 }
 export const getThreeItemCategory = async () => {
     const categories = await prisma.category.findMany({ take:3})
+    prisma.$disconnect()
     return categories
 }
 

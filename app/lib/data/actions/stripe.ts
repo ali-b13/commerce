@@ -19,13 +19,16 @@ export async function createCheckoutSession(
     const ui_mode = "hosted"
 
     const origin: string = headers().get("origin") as string;
-   const {lineItems,totalAmount,taxAmount}= await calculateItems(data)
+    const user=await getUser()
+    const cart=await prisma.cart.update({where:{id:data.cartId},data:{userId:user?.id}})
+    
+    const {lineItems,totalAmount,taxAmount}= await calculateItems(data)
    const orderIds =await placeOrder(data)
     const checkoutSession: Stripe.Checkout.Session =
         await stripe.checkout.sessions.create({
             mode: "payment",
             submit_type: "pay",
-            payment_intent_data: { metadata: { orderId: JSON.stringify(orderIds), cartId: JSON.stringify(data.cartId)}},
+            payment_intent_data: { metadata: { orderId: JSON.stringify(orderIds), cartId: JSON.stringify(cart?.id)}},
             tax_id_collection:{enabled:true},
             metadata: { orderIds: JSON.stringify(orderIds), cartId: JSON.stringify(data.cartId) },
             line_items: lineItems,
@@ -41,6 +44,7 @@ export async function createCheckoutSession(
        
     console.log("session",checkoutSession,'checkout')
     const CHECKOUT_SESSION_ID = checkoutSession.id;
+    prisma.$disconnect()
     return {
         client_secret: checkoutSession.client_secret,
         url: checkoutSession.url?.replace("{CHECKOUT_SESSION_ID}", CHECKOUT_SESSION_ID),

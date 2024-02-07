@@ -3,7 +3,7 @@ import OrderStatus from './status';
 import { formatAmountForDisplay, formatDateToLocal } from '@/app/lib/utils';
 import {IndicatorStatusMobile} from './indicatorStatus';
 
-export default async function OrdersTable({orders}:any) {
+export default  function OrdersTable({orders}:any) {
 
   return (
     <div className="mt-6 w-full flow-root min-h-[75vh]">
