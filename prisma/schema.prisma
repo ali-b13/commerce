@@ -65,88 +65,83 @@ model User {
 }
 
 model Order {
-  id                 String          @id @default(uuid())
-  name               String
-  amount             Int
-  address            String
-  product            Product         @relation(fields: [productId], references: [id])
-  createdAt          DateTime        @default(now())
-  updatedAt          DateTime        @updatedAt
-  paid               String
-  stages             Stage[]         // Define a relation to the Stage model
+  id                  String                @id @default(uuid())
+  name                String
+  amount              Int
+  address             String
+  product             Product               @relation(fields: [productId], references: [id])
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+  paid                String
+  stages              Stage[] // Define a relation to the Stage model
   orderProductVaraint orderProdcutVaraint[]
-  userId             String?
-  User               User?           @relation(fields: [userId], references: [id])
-  productId          String
-  quantity           Int
-  productVariantId   String?
- 
+  userId              String?
+  User                User?                 @relation(fields: [userId], references: [id])
+  productId           String
+  quantity            Int
+  productVariantId    String?
 }
+
 model orderProdcutVaraint {
-  id           String   @id @default(uuid())
-  name String ?
-  value String?
-  orderId String ?
-  order Order? @relation(fields: [orderId],references: [id])
-} 
+  id      String  @id @default(uuid())
+  name    String?
+  value   String?
+  orderId String?
+  order   Order?  @relation(fields: [orderId], references: [id])
+}
 
 model Stage {
-  id          String   @id @default(uuid())
-  name        String   // Example: "Received", "Out for Delivery", "Delivered"
-  date        DateTime // Date when this stage was reached
-  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade) // Cascade deletion from Order to Stage
-  orderId     String   // Foreign key to relate each stage to its order
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id        String   @id @default(uuid())
+  name      String // Example: "Received", "Out for Delivery", "Delivered"
+  date      DateTime // Date when this stage was reached
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade) // Cascade deletion from Order to Stage
+  orderId   String // Foreign key to relate each stage to its order
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
+
 model ProductVariant {
-  id          String   @id @default(uuid())
-  name        String
-  value       String
-  cartLineId  String
-  cartLine    CartLine  @relation(fields: [cartLineId], references: [id],onDelete: Cascade)
+  id         String   @id @default(uuid())
+  name       String
+  value      String
+  cartLineId String
+  cartLine   CartLine @relation(fields: [cartLineId], references: [id], onDelete: Cascade)
   // Define the relation to Option
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
- 
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Option {
-  id             String    @id @default(uuid())
-  name           String
-  values         String[]
-  productId      String
-  product        Product   @relation(fields: [productId], references: [id])
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
+  id        String   @id @default(uuid())
+  name      String
+  values    String[]
+  productId String
+  product   Product  @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-
-
-
 model Product {
-  id           String    @id @default(uuid())
-  title        String
-  price        Int
-  description  String?
-  image        String?
-  brand        String?
-  stock        Int?
-  currencyCode String?
-  isHidden     Boolean?
-  countSold    Int       @default(0)
-  material     String?
-  rating       Float?
-  salePrice    Int?
-  weight       String?
-  country      String?
-  categoryId   Int
-  category     Category  @relation(fields: [categoryId], references: [id])
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  cartLine     CartLine?
-
+  id               String            @id @default(uuid())
+  title            String
+  price            Int
+  description      String?
+  image            String?
+  brand            String?
+  stock            Int?
+  currencyCode     String?
+  isHidden         Boolean?
+  countSold        Int               @default(0)
+  material         String?
+  rating           Float?
+  salePrice        Int?
+  weight           String?
+  country          String?
+  categoryId       Int
+  category         Category          @relation(fields: [categoryId], references: [id])
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
   // Relationships
   options          Option[]
   variants         Variant[]
@@ -154,6 +149,7 @@ model Product {
   additionalImages AdditionalImage[]
   tags             String[]
   Order            Order[]
+  CartLine         CartLine[] 
 }
 
 // schema.prisma
@@ -169,16 +165,13 @@ model Cart {
 model CartLine {
   id             String           @id @default(uuid())
   quantity       Int
-  productId      String // Assuming product ID is stored here
-  product        Product          @relation(fields: [productId], references: [id])
+   productId String
+  product   Product  @relation(fields: [productId], references: [id])
   cart           Cart             @relation(fields: [cartId], references: [id])
   cartId         String
-  ProductVariant ProductVariant[] 
+  ProductVariant ProductVariant[]
 
-  @@unique([productId])
 }
-
-
 
 model Variant {
   id               String           @id @default(uuid())

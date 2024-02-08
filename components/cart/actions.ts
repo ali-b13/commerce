@@ -16,6 +16,7 @@ export const addItem=async(prevState: any, selectedVariant: string | undefined)=
 
     if (cartId) {
         cart = await getCart(cartId);
+        console.log(cart,'çart')
     }
 
     if (!cartId || !cart) {

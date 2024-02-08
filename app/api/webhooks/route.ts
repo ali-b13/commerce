@@ -4,7 +4,6 @@ const prisma = new PrismaClient()
 import { NextResponse } from "next/server";
 
 import { stripe } from "@/app/lib/stripe";
-import { cookies } from "next/headers";
 
 export async function POST(req: Request) {
     let event: Stripe.Event;

@@ -6,6 +6,8 @@ import { addItem } from './actions';
 import LoadingDots from '../loading-dots';
 import { useSearchParams } from 'next/navigation';
 import { useFormState, useFormStatus } from 'react-dom';
+import { useSession } from 'next-auth/react';
+import useLoginModal from '@/app/hooks/useLoginModal';
 
 function SubmitButton({
   availableForSale,
@@ -69,19 +71,29 @@ export function AddToCart({
   variants: any;
   availableForSale: boolean;
 }) {
+  const {data:session}=useSession()
+  const {onOpen}= useLoginModal()
+ 
   const [message, formAction] = useFormState(addItem, null);
   const searchParams = useSearchParams();
   const defaultVariant = variants.length === 1 ? variants[0] : undefined;
-const variant = variants.find((variant: any) =>
+  const variant = variants.find((variant: any) =>
   variant.selectedOptions.map((option:any)=>{
     return option.value.toLowerCase()==searchParams.get(option.name.toLowerCase())
   })
-);
-
+  );
+  
   const selectedVariant = variant || defaultVariant;
-
+  
   const actionWithVariant = formAction.bind(null, selectedVariant);
- 
+  if(!session?.user){
+   return  ( <button className='relative flex w-full items-center 
+      justify-center 
+      rounded-full bg-blue-600 p-4 tracking-wide
+       text-white cursor-pointer' onClick={()=>onOpen()} >Login to add to cart</button>
+   )
+  }
+  
   return (
     <form action={actionWithVariant}>
       <SubmitButton availableForSale={availableForSale} selectedVariantId={selectedVariant} />

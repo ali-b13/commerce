@@ -720,7 +720,8 @@ async function seedCategories() {
 const prisma = new PrismaClient()
 async function main() {
     //   await seedCategories()
-      await seedProducts()
+    //   await seedProducts()
+    // await prisma.cart.deleteMany()
     // await editProduct("4990e7b8-ddc2-4c47-a62f-a6d4b8633ab1")
     // await prisma.productVariant.deleteMany()
     // await prisma.cartLine.deleteMany()

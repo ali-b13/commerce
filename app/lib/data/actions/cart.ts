@@ -1,13 +1,12 @@
 import { PrismaClient } from '@prisma/client';
-import { getServerSession } from 'next-auth';
-import { authConfig } from '@/authConfig';
+import getUser from './getUser';
 
 const prisma = new PrismaClient()
 
 
 export const getCart=async(cartId:string)=>{
     try {
-        const user= await getServerSession(authConfig)
+        const user= await getUser()
         const cart = await prisma.cart.findFirst({
             where: { id: cartId },
             include: {
@@ -20,8 +19,9 @@ export const getCart=async(cartId:string)=>{
             }
         });
         const { subtotalAmount, taxAmount, totalAmount }:any =await  calculateCartTotal(cart?.lines)
+        console.log(cart,"cart in get")
         prisma.$disconnect()
-      return { products: cart?.lines, totalItems: cart?.lines.length || 0,cartId:cart?.id, user:user?.user.name,taxes: taxAmount, subtotalAmount,totalAmount}
+      return { products: cart?.lines, totalItems: cart?.lines.length || 0,cartId:cart?.id, user:user?.name,taxes: taxAmount, subtotalAmount,totalAmount}
    
     } catch (error) {
         console.log(error)
@@ -46,6 +46,8 @@ export async function createCart(userId?: string) {
 
 export async function addToCart(cartId: string, productId: string, quantity: number,variants:[]) {
     try {
+        console.log(productId,'product id')
+        console.log(cartId,'çart id')
         await prisma.cartLine.create({
             data: {
                 quantity: quantity,

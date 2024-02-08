@@ -10,6 +10,7 @@ import ToastProvider from "./providers/ToastProvider";
 import {getServerSession} from "next-auth";
 import { authConfig } from "@/authConfig";
 import { SessionProp } from "./lib/data/types";
+import Provider from "./providers/SessionProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,7 +31,8 @@ export default async function RootLayout({
       <body className={inter.className}>
     
 
-           `
+           `<Provider>
+
          <NavBar session={session}/>
             <UserLoginModal/>
             <UserRegisterModal/>
@@ -39,6 +41,7 @@ export default async function RootLayout({
           <main>{children}</main>
         </Suspense>
         <Footer/>
+           </Provider>
        
         
         </body>
