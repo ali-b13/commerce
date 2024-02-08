@@ -52,6 +52,7 @@ export type SessionProp = {
         name?: String,
         image?: String,
         email?: String
+        id?:string
    }
    expires:Date
 }

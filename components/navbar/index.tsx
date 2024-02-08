@@ -17,7 +17,7 @@ const SITE_NAME  = "Arma";
 
 export default async function Navbar({session}:{session:SessionProp|null}) {
   const menu:Category[] =await getThreeItemCategory()
-
+   
   // await getMenu('next-js-frontend-header-menu');
 
   return (
@@ -60,7 +60,7 @@ export default async function Navbar({session}:{session:SessionProp|null}) {
            <div className='hidden md:flex w-full  gap-4 ml-12'>
             <UserAuthButtons session={session}/>
           </div>
-            <Link href={'/orders'} className='text-neutral-800 cursor-pointer hover:text-neutral-400'>Orders</Link>
+            {session?.user.id&&<Link href={`/orders/${session?.user.id}`} className='text-neutral-800 cursor-pointer hover:text-neutral-400'>Orders</Link>}
          <Cart/>
         </div>
       </div>

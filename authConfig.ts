@@ -55,6 +55,10 @@ export const authConfig  = {
             return true
         },
         async session({ session, token, user }: any) {
+            console.log(user,'user')
+            const existedUser=await prisma.user.findUnique({where:{email:session.user.email,name:session.user.name}})
+            session.user.id= existedUser?.id
+
             console.log(session, 'session')
             // console.log(session,'sses')
             // session.accessToken = token.accessToken

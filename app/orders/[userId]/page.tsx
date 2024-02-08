@@ -1,10 +1,11 @@
+import { getOrders } from "@/app/lib/data/actions/getOrders";
 import OrdersTable from "@/components/orders/table";
-import { getOrders } from "../lib/data/actions/getOrders";
 import { Suspense } from "react";
 
-export default  async function page(){
-  const orders =await getOrders()
 
+export default  async function page({params}:{params:{userId:string}}){
+  console.log(params,'params')
+    const orders =await getOrders(params.userId)
   return(
     <div className="w-full flex flex-col align-middle">
        <Suspense fallback={<div className="animate-pulse w-full bg-neutral-300 h-12"></div>}>
