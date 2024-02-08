@@ -55,17 +55,18 @@ export const authConfig  = {
             return true
         },
         async session({ session, token, user }: any) {
-            try {
+            return session
+            // try {
                 
-                const existedUser=await prisma.user.findUnique({where:{email:session.user.email,name:session.user.name}})
-                if(existedUser){
+            //     const existedUser=await prisma.user.findUnique({where:{email:session.user.email,name:session.user.name}})
+            //     if(existedUser){
     
-                    session.user.id= existedUser?.id
-                }
-                return session
-            } catch (error) {
-                return session
-            }
+            //         session.user.id= existedUser?.id
+            //     }
+            //     return session
+            // } catch (error) {
+            //     return session
+            // }
 
         },
 
