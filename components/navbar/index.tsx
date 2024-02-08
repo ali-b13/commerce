@@ -25,7 +25,7 @@ export default async function Navbar({session}:{session:SessionProp|null}) {
 
       <div className="block flex-none md:hidden">
    
-        <MobileMenu menu={menu} />
+        <MobileMenu session={session}  menu={menu} />
      
       </div>
         <Suspense fallback={<DeskTopNavbarSkeleton/>}>

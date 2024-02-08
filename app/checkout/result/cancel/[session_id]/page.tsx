@@ -20,7 +20,7 @@ export default async function successPage({
     return notFound()
   }
   return (
-    <div className="h-[86vh] flex flex-col justify-center items-center bg-blue-100">
+    <div className="h-[60vh] flex flex-col justify-center items-center bg-blue-100">
       <div className='h-[50vh] shadow-md '>
         <title>Payment Failed</title>
         <meta name="description" content="Your payment was failed!" />
@@ -31,6 +31,7 @@ export default async function successPage({
         <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
+        className='text-red-600 text-center'
         viewBox="0 0 24 24"
         stroke="currentColor"
         width="24"

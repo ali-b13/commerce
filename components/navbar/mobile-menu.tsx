@@ -9,8 +9,9 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 import Search from './search';
 import { MobileNavBarSkelton } from '../skeltons/navbar';
+import UserOption from '../UserAuthButtons';
 
-export default function MobileMenu({ menu }: { menu:any}) {
+export default function MobileMenu({ menu ,session}: { menu:any,session:any}) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
@@ -75,8 +76,7 @@ export default function MobileMenu({ menu }: { menu:any}) {
                   <XMarkIcon color='black' className="h-6" />
                 </button>
                 <div className='flex md:hidden   gap-4 w-auto '>
-            <span>Login</span>
-            <span>Sign Up</span>
+             <UserOption session={session}/>
             </div>
                </div>
 
