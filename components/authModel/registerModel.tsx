@@ -117,7 +117,7 @@ const UserRegisterModal = () => {
    small
    label='Continue with Google'
    icon={FcGoogle}
-   onClick={()=>{}}
+   onClick={()=>signIn("google")}
    />
   
    <div className='flex flex-row gap-2 justify-center items-center  '>

@@ -20,7 +20,7 @@ export default async function successPage({
     return notFound()
   }
   return (
-    <div className="h-[80vh] flex flex-col justify-center items-center bg-blue-100">
+    <div className="h-[70vh] flex flex-col justify-center items-center bg-blue-100">
       <div className='h-[50vh] shadow-md '>
         <title>Payment Failed</title>
         <meta name="description" content="Your payment was failed!" />

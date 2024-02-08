@@ -30,6 +30,7 @@ const toggleModalToRegister=()=>{
    console.log(data,'inputs')
      setIsLoading(true);
      signIn("credentials",{email:data.email,password:data.password}).then((res:any)=>{
+      console.log(res,'res')
      if(res.error){
        setMessage(res.error.message)
 

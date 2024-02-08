@@ -62,7 +62,7 @@ export async function addToCart(cartId: string, productId: string, quantity: num
                 }
             },include:{ProductVariant:true}
         });
-        prisma.$disconnect()
+     await  prisma.$disconnect()
         // Optionally, you can return the updated cart with the added line
     } catch (error: any) {
         throw new Error(`Failed to add item to cart: ${error.message}`);
@@ -94,7 +94,7 @@ export const removeItem=async(cartLineId:string)=>{
         } else {
             console.log(`CartLine with ID ${cartLineId} not found.`);
         }
-        prisma.$disconnect()
+       await prisma.$disconnect()
     } catch (error: any) {
         throw new Error(`Failed to delete cartLine: ${error.message}`);
     }
@@ -124,7 +124,7 @@ export const updateCart = async (cartId: string, lineId:string,quantity:number)=
 
         // Optionally, you can update the quantity of the associated ProductVariant
         // Assuming that the variantId in the payload corresponds to the variantId in the cartLine
-        prisma.$disconnect()
+       await prisma.$disconnect()
         return { success: true, message: `Quantity updated successfully.` };
     } else {
         throw new Error(`CartLine with ID ${lineId} not found.`);
