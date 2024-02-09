@@ -7,7 +7,6 @@ import { formatDateToLocal } from '@/app/lib/utils';
 import { LuPackageCheck } from "react-icons/lu";
 
 export default function OrderStatus({ status }:any) {
-  console.log(status,'status')
   return (
    <Suspense fallback={<span>...</span>}>
      <span

@@ -27,12 +27,12 @@ const toggleModalToRegister=()=>{
   RegisterModal.onOpen()
 }
  const onSubmit:SubmitHandler<FieldValues>=(data)=>{
-   console.log(data,'inputs')
      setIsLoading(true);
-     signIn("credentials",{email:data.email,password:data.password}).then((res:any)=>{
-      console.log(res,'res')
+     signIn("credentials",{email:data.email,password:data.password,redirect:false}).then((res:any)=>{
+    
      if(res.error){
-       setMessage(res.error.message)
+       toast.error("Login failed")
+       setMessage(res.error)
 
      }
        if(!res?.error){

@@ -32,10 +32,10 @@ export const authConfig  = {
                             return Promise.resolve(user);
                         }
                     }
-                    return null
+                    throw new Error("Invalid credentials")
                 } catch (error) {
                     console.log(error, 'error in sign in')
-                    return null
+                     throw new Error("Invalid credentials")
 
                 }
                 
@@ -55,18 +55,17 @@ export const authConfig  = {
             return true
         },
         async session({ session, token, user }: any) {
-            return session
-            // try {
+            try {
                 
-            //     const existedUser=await prisma.user.findUnique({where:{email:session.user.email,name:session.user.name}})
-            //     if(existedUser){
-    
-            //         session.user.id= existedUser?.id
-            //     }
-            //     return session
-            // } catch (error) {
-            //     return session
-            // }
+                const existedUser=await prisma.user.findUnique({where:{email:session.user.email,name:session.user.name}})
+                if(existedUser){
+                    
+                    session.user.id= existedUser?.id
+                }
+                return session
+            } catch (error) {
+                return session
+            }
 
         },
 

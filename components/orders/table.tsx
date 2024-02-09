@@ -2,11 +2,8 @@ import Image from 'next/image';
 import OrderStatus from './status';
 import { formatAmountForDisplay, formatDateToLocal } from '@/app/lib/utils';
 import {IndicatorStatusMobile} from './indicatorStatus';
-import getUser from '@/app/lib/data/actions/getUser';
-import { getOrders } from '@/app/lib/data/actions/getOrders';
 export const revalidate ="force-cache"
 export default async function OrdersTable({orders}:{orders:any}) {
-//  const user =await getUser()
    if(!orders){
     return <div className='text-neutral-700 text-3xl text-center'>No orders yet </div>
    }

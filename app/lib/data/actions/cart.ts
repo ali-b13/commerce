@@ -19,9 +19,9 @@ export const getCart=async(cartId:string)=>{
             }
         });
         const { subtotalAmount, taxAmount, totalAmount }:any =await  calculateCartTotal(cart?.lines)
-        console.log(cart,"cart in get")
+
         prisma.$disconnect()
-      return { products: cart?.lines, totalItems: cart?.lines.length || 0,cartId:cart?.id, user:user?.name,taxes: taxAmount, subtotalAmount,totalAmount}
+      return { products: cart?.lines, totalItems: cart?.lines.length || 0,cartId:cart?.id, user:user?.id,taxes: taxAmount, subtotalAmount,totalAmount}
    
     } catch (error) {
         console.log(error)

@@ -20,24 +20,24 @@ export default async function successPage({
     return notFound()
   }
   return (
-    <div className="h-[70vh] flex flex-col justify-center items-center bg-blue-100">
+    <div className="h-[75vh] flex flex-col justify-center items-center gap-12 bg-blue-100">
       <div className='h-[50vh] shadow-md '>
         <title>Payment Failed</title>
         <meta name="description" content="Your payment was failed!" />
         <link rel="icon" href="/favicon.ico" />
       </div>
 
-      <div className="bg-white w-[95%] md:w-[60%] p-12 rounded-lg  shadow-md">
+      <div className="bg-white w-[95%] md:w-[60%] p-12 rounded-lg  flex flex-col items-center gap-4  shadow-md">
         <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         className='text-red-600 text-center'
         viewBox="0 0 24 24"
         stroke="currentColor"
-        width="24"
-        height="24"
+        width="44"
+        height="44"
         >
-        <circle cx="12" cy="12" r="10" stroke-width="2" />
+        <circle cx="12" cy="12" r="10" strokeWidth="2" />
         <path d="M15 9l-6 6M9 9l6 6" />
         </svg>
         <h1 className="text-3xl font-bold text-center text-red-600 mb-1">
@@ -48,7 +48,7 @@ export default async function successPage({
           please try again .
         </p>
       </div>
-        <Link href={"/"} className='bg-blue-500 text-white text-center rounded-lg p-2 mt-4 w-[70%] md:w-[30%] '>Go Back</Link>
+        <Link href={"/"} className='bg-blue-500 text-white text-center rounded-lg p-2 mb-4 w-[70%] md:w-[30%] '>Go Back</Link>
     </div>
   );
 }
