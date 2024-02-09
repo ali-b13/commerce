@@ -60,7 +60,7 @@ export default async function Navbar({session}:{session:SessionProp|null}) {
            <div className='hidden md:flex w-full  gap-4 ml-12'>
             <UserAuthButtons session={session}/>
           </div>
-            {session?.user.name&&<Link href={`/orders`} className='text-neutral-800 cursor-pointer hover:text-neutral-400'>Orders</Link>}
+           <Link href={`/orders`} className='text-neutral-800 cursor-pointer hover:text-neutral-400'>Orders</Link>
          <Cart/>
         </div>
       </div>
