@@ -76,7 +76,7 @@ export default function MobileMenu({ menu ,session}: { menu:any,session:any}) {
                   <XMarkIcon color='black' className="h-6" />
                 </button>
                 <div className='flex md:hidden   gap-4 w-auto '>
-             <UserOption session={session}/>
+             <UserOption closeAction={closeMobileMenu} session={session}/>
             </div>
                </div>
 
@@ -90,7 +90,7 @@ export default function MobileMenu({ menu ,session}: { menu:any,session:any}) {
                         className="py-2 text-xl text-black transition-colors hover:text-neutral-500 "
                         key={item.id}
                       >
-                        <Link href={item.name} onClick={closeMobileMenu}>
+                        <Link href={`/search/${item.name}`} onClick={closeMobileMenu}>
                           {item.name}
                         </Link>
                       </li>

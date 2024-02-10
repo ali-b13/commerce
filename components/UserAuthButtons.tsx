@@ -8,22 +8,36 @@ import { signOut } from 'next-auth/react';
 import { SessionProp } from '@/app/lib/data/types';
 
 interface UserOptionsProps{
-  session:SessionProp|null
+  session:SessionProp|null,
+  closeAction?:()=>void;
 }
-const UserOption:React.FC<UserOptionsProps> = ({session}) => {
+const UserOption:React.FC<UserOptionsProps> = ({session,closeAction}) => {
   const userRegisterModal=useRegisterModal();
   const userLoginModal=useLoginModal();
-
+  const handleOpenLoginModel=()=>{
+      if(closeAction){
+        closeAction();
+       
+       }
+        userLoginModal.onOpen()
+  }
+   const handleOpenRegisterModel=()=>{
+       if(closeAction){
+        closeAction();
+       
+       }
+        userRegisterModal.onOpen()
+  }
   return (
     <>
     {!session?.user.name? (
         <>
           <MenuItem
-      onClick={userLoginModal.onOpen}
+      onClick={handleOpenLoginModel}
       label={"Login"}
       />
        <MenuItem
-      onClick={userRegisterModal.onOpen}
+      onClick={handleOpenRegisterModel}
       label={"Register"}
       />  
         </>
