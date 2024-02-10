@@ -4,7 +4,7 @@ import { formatAmountForDisplay, formatDateToLocal } from '@/app/lib/utils';
 import {IndicatorStatusMobile} from './indicatorStatus';
 export const revalidate ="force-cache"
 export default async function OrdersTable({orders}:{orders:any}) {
-   if(!orders){
+   if(!orders.length){
     return <div className='text-neutral-700 text-3xl text-center'>No orders yet </div>
    }
   return (
@@ -48,7 +48,7 @@ export default async function OrdersTable({orders}:{orders:any}) {
               </div>
             ))}
           </div>
-          <table className="hidden min-w-full text-gray-900 md:table">
+          <table className="hidden min-w-full text-gray-900 md:table ">
             <thead className="rounded-lg text-left text-sm font-normal">
               <tr>
                 <th scope="col" className="px-4 py-5 font-medium sm:pl-6">

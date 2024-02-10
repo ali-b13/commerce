@@ -91,7 +91,7 @@ const placeOrder = async (data: any) => {
                         productId: product.productId,
                         amount: Number(product.product.price*product.quantity),
                         quantity: product.quantity,
-                        paid: "failed",
+                        paid: "paid",
                         userId: user?.id,
                         orderProductVaraint: {
                             createMany: {
@@ -109,10 +109,12 @@ const placeOrder = async (data: any) => {
 
                 // Push the ID of the created order to the orderIds array
                 orderIds.push(order.id);
-                 const insertedOrder=await prisma.order.findUnique({where:{id:order.id},include:{orderProductVaraint:true}})
-                console.log("success created order", insertedOrder);
             }
         }
+        if (data.cartId) {
+            await prisma.cartLine.deleteMany({ where: { cartId: data.cartId } })
+        }
+
     } catch (error) {
         console.log(error, 'error in placing order');
         throw error; // Rethrow the error to handle it in the calling function

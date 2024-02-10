@@ -8,10 +8,12 @@ import { stripe } from "@/app/lib/stripe";
 
 export async function POST(req: Request) {
     let event: Stripe.Event;
+    console.log(req.headers.get("stripe-signature"),'stripe signature')
 
     try {
+        const body =await req.json()
         event = stripe.webhooks.constructEvent(
-            await (await req.blob()).text(),
+            body,
             req.headers.get("stripe-signature") as string,
             process.env.STRIPE_WEBHOOK_SECRET as string,
         );

@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import getUser from './getUser';
+import { cookies } from 'next/headers';
 
 const prisma = new PrismaClient()
 
@@ -158,4 +159,18 @@ export const updateCart = async (cartId: string, lineId:string,quantity:number)=
     } catch (error: any) {
         throw new Error(`Failed to calculate cart total: ${error.message}`);
     }
+}
+
+export const getProductInCart=async(id:string)=>{
+    const cartId = cookies().get('cartId')?.value;
+    try {
+       
+        const line =await prisma.cartLine.findFirst({where:{cartId:cartId,productId:id},include:{product:true}})
+        return line
+
+    }
+    catch(err){
+        console.log(err)
+    }
+            
 }

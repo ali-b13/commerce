@@ -45,8 +45,8 @@ export default async function successPage({
         <h1 className="text-3xl font-bold text-center text-green-600 mb-1">
           Payment Successful
         </h1>
-        <p className='text-sm font-semibold text-center text-neutral-400 mb-4'>Payment id {paymentIntent.id}</p>
-        <p className="text-lg text-center text-gray-700">
+        <p className='text-sm font-semibold text-center text-neutral-400 mb-4 p-2'>Payment id {paymentIntent.id}</p>
+        <p className="text-lg text-center text-gray-700 p-4">
           Thank you for your payment.
         </p>
       </div>

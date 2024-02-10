@@ -31,9 +31,6 @@ const productPage = async({params}:{params:{productId:string}}) => {
           <RelatedProducts id={product.id} />
         </Suspense>
       </div>
-      {/* <Suspense>
-        <Footer />
-      </Suspense> */}
     </>
     );
 }
